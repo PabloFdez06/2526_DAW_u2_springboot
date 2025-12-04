@@ -14,10 +14,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Build and push the Docker image
+    - name: Build the Docker image
       run: docker build . --file Dockerfile --tag 2526_daw_u2_springboot:$(date +%s)
 
+    - uses: actions/login-action@v3
     - name: Log into registry
+      with:
+        registry: registry.hub.docker.com
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_PASSWORD }}
+
       run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }} registry.hub.docker.com
 
     - name: Push the Docker image
