@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Build and push the Docker image
-      run: docker build . --file Dockerfile --tag 2526_daw_u2_springboot:$(date +%s) docker image push
+      run: docker build . --file Dockerfile --tag 2526_daw_u2_springboot:$(date +%s) --push
